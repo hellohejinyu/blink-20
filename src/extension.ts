@@ -51,30 +51,32 @@ export function activate(context: vscode.ExtensionContext) {
     statusBarItem.command = 'blink-20.showRule';
     context.subscriptions.push(statusBarItem);
 
-    // Initial State
     if (vscode.window.state.focused) {
         startTimer();
     } else {
         lastBlurTime = Date.now();
-        updateStatusBar(true);
+        startTimer(); // Start timer even if initially blurred
     }
 
     // Windows Focus State Listener
     context.subscriptions.push(vscode.window.onDidChangeWindowState(state => {
         if (state.focused) {
             // Regained focus
-            const blurDuration = Date.now() - lastBlurTime;
-            if (blurDuration > resetThresholdMs) {
-                // If away for > 30s, reset the timer (assume they rested)
-                accumulatedTime = 0;
-                vscode.window.showInformationMessage(I18n.get('blink-20.restComplete')); // Optional: Feedback that timer reset? Maybe too noisy. Let's just update text.
+            if (lastBlurTime > 0) {
+                const blurDuration = Date.now() - lastBlurTime;
+                if (blurDuration > resetThresholdMs) {
+                    // If away for > 5 mins, reset the timer (assume they rested)
+                    accumulatedTime = 0;
+                } else if (accumulatedTime >= intervalMs) {
+                     // If away for < 5 mins BUT timer finished during break, trigger rest now
+                     showRestNotification();
+                }
+                lastBlurTime = 0;
             }
-            startTimer();
         } else {
             // Lost focus
-            stopTimer(); // Pause accumulation
             lastBlurTime = Date.now();
-            updateStatusBar(true);
+            // Do NOT stop timer. Timer continues to run.
         }
     }));
 
@@ -88,12 +90,7 @@ export function activate(context: vscode.ExtensionContext) {
 function updateStatusBar(paused: boolean = false) {
     statusBarItem.show();
     
-    if (paused) {
-         statusBarItem.text = `$(eye) $(debug-pause)`; 
-         statusBarItem.tooltip = I18n.get('blink-20.statusBarTooltip') + " (Paused)";
-         return;
-    }
-
+    // Timer no longer pauses on blur, so we don't show "Paused" state
     const remaining = Math.max(0, intervalMs - accumulatedTime);
     const minutes = Math.floor(remaining / 60000);
     const seconds = Math.floor((remaining % 60000) / 1000);
@@ -111,8 +108,13 @@ function startTimer() {
         updateStatusBar();
 
         if (accumulatedTime >= intervalMs) {
-            showRestNotification();
-            stopTimer(); // Stop measuring while modal is open/resting
+            // Only trigger rest if user is currently focused
+            if (vscode.window.state.focused) {
+                showRestNotification();
+                stopTimer(); // Stop measuring while modal is open/resting
+            }
+            // If not focused, the timer continues to run, and the notification will be triggered
+            // when focus is regained (handled by onDidChangeWindowState).
         }
     }, 1000);
     

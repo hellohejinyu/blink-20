@@ -2,7 +2,7 @@
   "name": "blink-20",
   "displayName": "Blink 20",
   "description": "%blink-20.description%",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "30x-link",
   "icon": "logo.png",
   "license": "GPL-3.0",

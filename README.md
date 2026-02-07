@@ -18,14 +18,14 @@ This simple habit relaxes the focusing muscles inside the eye, reducing fatigue 
 ## Features
 
 ### ⏱️ Smart Focus Timer
-- **Automatic Tracking**: The timer starts when you focus on VS Code.
-- **Auto-Pause**: If you switch windows or step away for a moment, the timer pauses automatically.
+- **Automatic Tracking**: The timer starts when you open VS Code.
+- **Continuous Mode**: Moving focus to another window does *not* stop the timer (short switching is considered work).
 - **Smart Reset**: If you leave VS Code for more than **5 minutes**, the timer resets, assuming you've taken a break.
 
 ### 🔔 Gentle yet Effective Reminders
-- **Status Bar Integration**: A discreet `👁️ MM:SS` countdown keeps you informed without distraction.
-- **Focus Mode**: When it's time to rest, a modal dialog gently interrupts your workflow to ensure you take a break.
-- **Enforced Rest**: A 20-second progress bar guides you through the break, ensuring you rest for the full duration.
+- **Status Bar Integration**: A discreet `👁️ MM:SS` countdown keeps you informed.
+- **Focus Mode**: When it's time to rest, a modal dialog gently interrupts your workflow.
+- **Enforced Rest**: A 20-second progress bar guides you through the break.
 
 ### 🌍 Localization / 多语言支持
 - **English**: Fully localized interface.
@@ -39,22 +39,10 @@ This simple habit relaxes the focusing muscles inside the eye, reducing fatigue 
 2. **Code**: Just start coding! The timer runs automatically.
 3. **Rest**: When the notification appears:
    - Click **"Start Rest"** (or **"开始休息"**).
-   - Look away from your screen for 20 seconds until you hear the completion tone (visual cue).
-
----
-
-## Configuration
-
-Blink 20 is designed to work out of the box with zero configuration.
-- **Timer**: 20 Minutes (Fixed)
-- **Rest**: 20 Seconds (Fixed)
-
-*> Note: In Extension Development Mode, timers are accelerated (10s work / 5s rest) for testing purposes.*
+   - Look away from your screen for 20 seconds.
 
 ---
 
 ## Legal
 
-This extension is provided "as is" and is not a substitute for professional medical advice. If you experience persistent eye discomfort, please consult an eye care professional.
-
-**Enjoy coding, and keep your eyes healthy!**
+This extension is provided "as is" under the GPL-3.0 License.

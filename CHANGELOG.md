@@ -1,9 +1,11 @@
 # Change Log
 
-All notable changes to the "blink-20" extension will be documented in this file.
+## [0.0.3] - 2026-02-08
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+### Changed
 
-## [Unreleased]
+- Adjusted logic for long periods of focus loss.
+
+## [0.0.2] - 2026-02-08
 
 - Initial release
