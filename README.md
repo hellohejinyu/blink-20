@@ -21,6 +21,8 @@ This simple habit relaxes the focusing muscles inside the eye, reducing fatigue 
 - **Automatic Tracking**: The timer starts when you open VS Code.
 - **Continuous Mode**: Moving focus to another window does *not* stop the timer (short switching is considered work).
 - **Smart Reset**: If you leave VS Code for more than **5 minutes**, the timer resets, assuming you've taken a break.
+- **Multi-Window Sync**: The timer state is synchronized across all open VS Code windows.
+- **State Persistence**: The timer state is saved, so restarting VS Code won't reset your progress.
 
 ### 🔔 Gentle yet Effective Reminders
 - **Status Bar Integration**: A discreet `👁️ MM:SS` countdown keeps you informed.
