@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.0.5] - 2026-02-19
+
+### Fixed
+
+- Fixed incorrect display of extension description
+
 ## [0.0.4] - 2026-02-08
 
 ### Added
